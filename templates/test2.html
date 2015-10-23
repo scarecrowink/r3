@@ -1,0 +1,60 @@
+<html>
+<script>
+//make each alarm id the unixtimestamp for that time
+
+//from json
+var start = 8;
+var stop = 22;
+var numAlerts = 10;
+var minTime = 15;
+var dist = 1;
+var alerts = [];
+
+var today = new Date().getTime(); //javascript time for midnight
+var tomorrow = new Date().getTime() + 24*60*60*1000;//javascript time for midnight tomorrow
+var temp = new Date();
+console.log(temp);
+temp.setHours(8);
+console.log(temp);
+//var todayU = new Date(today);//converted to readable
+//var tomorrowU = new Date(tomorrow);//converted to readable
+var startTime = Math.floor((today) + (start*60*60*1000));
+var stopTime = Math.floor((today) + (stop*60*60*1000));
+//console.log(startTime);
+//console.log(stopTime);
+//startTime = (startTime.getTime()/60000);
+//stopTime = (stopTime.getTime()/60000);
+
+var totalMin = (stopTime-startTime)/60000;
+console.log(totalMin);
+
+if (dist == 1){//evenly distributed
+	if ((totalMin/numAlerts) < minTime){
+		alert("The are not enough hours in the day for that many alerts!");
+	}
+	else {
+		for (var i = 0; i<numAlerts; i++){
+	        var alarmTime = startTime;
+	        //alarmTime.setMinutes(alarmTime.getMinutes() + (i*minTime));
+	
+			var alertTime = Math.floor(startTime + (i*minTime));
+			alerts.push(alertTime);
+		}
+	}
+}
+else{//randomly distributed
+	//console.log("start "+startTime+" stop "+stopTime);
+	for (var i = 0; i<numAlerts; i++){
+		var randomizer = Math.random();
+		//console.log(randomizer+"*"+stopTime+"+1");
+		//var alertTime = Math.floor((Math.random() * stopTime) + 1);
+		var alertTime = Math.floor((Math.random()*(stopTime-startTime+1))+startTime);
+		alerts.push(alertTime);
+	}
+}
+
+console.log(alerts);
+
+</script>
+<body></body>
+</html>

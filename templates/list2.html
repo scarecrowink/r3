@@ -1,0 +1,20 @@
+<ion-view view-title="My Reminders">
+      <ion-content ng-controller='ListCtrl'>
+        <ion-list>
+          <ion-item class='item-remove-animate item-icon-right' href='#/edit/{{reminder.id}}' ng-repeat="reminder in reminders track by reminder.id">
+            <h2>{{reminder.title}}</h2>
+            <p>{{reminder.description}}</p>
+            <i class='icon ion-arrow-right-b'></i>
+            <ion-option-button class='button-assertive icon-left ion-trash-b' ng-click='remove(reminder.id)'>Delete</ion-option-button>
+          </ion-item>
+        </ion-list>
+    <button class="button" ng-click="set()">Add notification</button>
+    <button class="button" ng-click="isScheduled()">Is Scheduled</button>
+    <button class="button" ng-click="cancel()">Cancel</button>
+      </ion-content>
+      <div class='bar bar-footer bar-positive'>
+      	<a href='#/add'>
+      		<div class='title'><i class='icon-left ion-compose'></i> Add a Reminder</div>
+      	</a>
+      </div>
+</ion-view>

@@ -1,0 +1,73 @@
+<html>
+<script>
+//make each alarm id the unixtimestamp for that time
+
+//from json
+var start = 8;
+var stop = 22;
+var numAlerts = 10;
+var minTime = 15;
+var dist = 0;
+var alerts = [];
+
+var startTime = new Date();
+startTime.setHours(start);
+startTime.setMinutes(0);
+startTime.setSeconds(0);
+startTime.setMilliseconds(0);
+
+var stopTime = new Date();
+stopTime.setHours(stop);
+stopTime.setMinutes(0);
+stopTime.setSeconds(0);
+stopTime.setMilliseconds(0);
+
+var totalMin = (stopTime-startTime)/60000;
+var alertSize = totalMin/minTime;
+
+if (dist == 1){//evenly distributed
+	if ((totalMin/numAlerts) < minTime){
+		alert("The are not enough hours in the day for that many alerts!");
+	}
+	else {
+	    var alertTime = new Date();
+	    alertTime = startTime;
+	   	for (var i = 0; i<numAlerts; i++){
+			alertTime.setMinutes(alertTime.getMinutes() + alertSize);
+			alerts.push(alertTime.getTime());
+		}
+	}
+}
+else{//randomly distributed
+    var alertTime = new Date(startTime);
+	for (var i = 0; i<numAlerts; i++){
+		var randomizer = Math.floor((Math.random()*totalMin) + 1);
+		var hours = Math.floor(randomizer/60);
+		var minutes = randomizer % 60;
+		alertTime.setHours(startTime.getHours() + hours);
+		alertTime.setMinutes(startTime.getMinutes() + minutes);
+		var goodTime = 1;
+		//checks if new one is too close to others
+		for (var j = 0; j<alerts.length; j++){
+			if ((alerts[j] < (alertTime.getTime() + minTime*60*1000)) && (alerts[j] > (alertTime.getTime() - minTime*60*1000))){
+				goodTime = 0;
+			}
+		}
+		if (goodTime == 1){
+			console.log(i+" "+alertTime.getTime()+" "+goodTime);
+			alerts.push(alertTime.getTime());
+		}
+		else{
+			i = i-1;
+		}
+	}
+}
+
+console.log(alerts);
+for (var i=0; i<alerts.length; i++){
+	console.log(new Date(alerts[i]));
+}
+
+</script>
+<body></body>
+</html>

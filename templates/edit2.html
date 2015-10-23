@@ -1,0 +1,68 @@
+<ion-view view-title='Edit Reminders'>
+	<ion-content>
+		<div class='list card'>
+			<div class='item item-input'>
+				<input type='text' ng-model="reminder.title" placeholder="Name">
+			</div>
+			<div class='item item-input'>
+				<input type='text' ng-model='reminder.description' placeholder="Short Description">
+			</div>
+<!--			<div class='item item-input'>
+				<input type='text' ng-model='reminder.days' placeholder="Days">
+			</div>-->
+			<div class='item item-stacked-label'>
+				<span class='input-label'>Start Time {{reminder.startTime}}</span>
+				<div class='range range-balanced'>
+				<i class="icon ion-ios-clock-outline"></i>
+				<input type='range' name='startTime' ng-model='reminder.startTime' min='1' max='{{reminder.stopTime}}' value='8'>
+				<i class="icon ion-ios-clock"></i>
+				</div>
+			</div>
+			<div class='item item-stacked-label'>
+				<span class='input-label'>Stop Time {{reminder.stopTime}}</span>
+				<div class='range range-assertive'>
+				<i class="icon ion-ios-clock-outline"></i>
+				<input type='range' name='stopTime' ng-model='reminder.stopTime' min='{{(reminder.startTime)}}' max='23' value='22'>
+				<i class="icon ion-ios-clock"></i>
+			</div>
+			</div>
+			<div class='item item-stacked-label'>
+				<span class='input-label'># Reminders {{reminder.numAlerts}}</span>
+				<div class='range range-royal'>
+				<i class="icon ion-ios-alarm-outline"></i>
+				<input type='range' name='numAlerts' ng-model='reminder.numAlerts' min='1' max='60' value='15'>
+				<i class="icon ion-ios-alarm"></i>
+				</div>
+			</div>
+			<div class='item item-stacked-label'>
+				<span class='input-label'>Min Time {{reminder.minTime}}</span>
+				<div class='range range-energized'>
+				<i class="icon ion-ios-stopwatch-outline"></i>
+				<input type='range' name='minTime' ng-model='reminder.minTime' min='1' max='60' value='15'>
+				<i class="icon ion-ios-stopwatch"></i>
+			</div>
+			</div>
+			<div class='item item-stacked-label'>
+				<span class='input-label'>Distribution</span>
+				<div class='range range-calm'>
+				<p>Random</p>
+				<input type='range' name='numAlerts' ng-model='reminder.dist' min='0' max='1' value='1'>
+				<p>Even</p>
+				</div>
+			</div>				
+			<div class='item'>
+				<div class='range range-balanced'>
+				<p>Disabled</p>
+				<input type='range' name='numAlerts' ng-model='reminder.active' min='0' max='1' value='1'>
+				<p>Active</p>
+				</div>
+			</div>	
+<!--			<div class='item item-input'>
+				<ion-toggle ng-model="reminder.active" toggle-class="toggle-balanced">Active</ion-toggle>
+			</div>-->
+		</div>
+		<div class='padding'>
+			<button class='button button-block button-positive'ng-click='save()'>Save</button>
+		</div>
+	</ion-content>
+</ion-view>
